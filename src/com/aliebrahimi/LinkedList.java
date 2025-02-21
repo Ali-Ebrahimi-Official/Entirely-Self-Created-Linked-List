@@ -393,6 +393,90 @@ public class LinkedList<T> {
         this.tail.next = null;
 
     }
+    public T getByKThInd(int k){
+
+        if (this.head == null) {
+            throw new IndexOutOfBoundsException("can not perform getByKth() on empty liked list");
+        }
+
+        if (this.head.next == null) return this.head.value;
+
+        if (k == 0) return this.tail.value;
+
+
+        Node<T> kThNode = this.head;
+        Node<T> tempNode;
+
+        int a = 0;
+        int b;
+
+        for (int i = 1; i <= k; i++) {
+
+            kThNode = kThNode.next;
+            a++;
+        }
+
+
+        b = a;
+
+        while ((b - a) != k) {
+
+            kThNode = kThNode.next;
+            a++;
+            tempNode = kThNode;
+            b = a;
+
+            if (tempNode == null) {
+                throw new IndexOutOfBoundsException("invalid input");
+
+            }
+
+            while (tempNode.next != null) {
+                tempNode = tempNode.next;
+                b++;
+            }
+        }
+
+
+        return kThNode.value;
+
+
+    }
+    public T kTh(int k){
+
+        if (this.head == null) {
+            throw new IndexOutOfBoundsException("can not perform kTh() on empty liked list");
+        }
+
+        if (k == 0 || k < 0) {
+            throw new IllegalArgumentException("Invalid Input");
+        }
+
+        Node<T> a = this.head;
+        Node<T> b = this.head;
+
+        for (int i = 0; i < k - 1; i++){
+
+            b = b.next;
+
+            if (b == null) {
+                throw new IllegalArgumentException("Invalid Input");
+            }
+        }
+
+
+        while (b != this.tail) {
+
+            a = a.next;
+            b = b.next;
+
+
+        }
+
+        return a.value;
+
+
+    }
 
     @Override
     public String toString() {
